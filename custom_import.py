@@ -9,72 +9,72 @@ def make_index(es, index):
         index=index,
 
         body={
-            # "settings": {
-            #     "analysis": {
-            #         "analyzer": {
-            #             # 인덱싱 형태소 분석기
-            #             "my_analyzer": {
-            #                 "type": "custom",
-            #                 "tokenizer": "standard",
-            #                 "filter": [
-            #                     # cjk_bigram : bigram 단위로 토큰화
-            #                     "cjk_bigram"
-            #                 ]
-            #             },
-            #             # 검색어 형태소 분석기
-            #             "my_stop_analyzer": {
-            #                 "type": "custom",
-            #                 "tokenizer": "standard",
-            #                 "filter": [
-            #                     "cjk_bigram"
-            #                 ]
-            #             }
-            #         }
-            #     }
-            # },
             "settings": {
                 "analysis": {
                     "analyzer": {
+                        # 인덱싱 형태소 분석기
                         "my_analyzer": {
                             "type": "custom",
-                            "tokenizer": "nori_discard",
+                            "tokenizer": "standard",
                             "filter": [
-                                "korean_shingle"
+                                # cjk_bigram : bigram 단위로 토큰화
+                                "cjk_bigram"
                             ]
                         },
+                        # 검색어 형태소 분석기
                         "my_stop_analyzer": {
                             "type": "custom",
-                            "tokenizer": "nori_discard",
+                            "tokenizer": "standard",
                             "filter": [
-                                "korean_shingle"
+                                "cjk_bigram"
                             ]
-                        }
-                    },
-                    "tokenizer" : {
-                        "nori_discard" : {
-                            "type" : "nori_tokenizer",
-                            "decompound_mode" : "mixed"
-                        }
-                    },
-                    "filter": {
-                        # custom filter shingle
-                        "korean_shingle": {
-                            "type": "shingle",
-                            "token_separator": '',
-                            "max_shingle_size" : 3
-                        },
-                        "korean_bigrams_filter": {
-                            "type": "cjk_bigram",
-                            "ignored_scripts": [
-                                "han",
-                                "hiragana",
-                                "katakana"
-                            ],
-                            "output_unigrams": True
                         }
                     }
                 }
             },
+            # "settings": {
+            #     "analysis": {
+            #         "analyzer": {
+            #             "my_analyzer": {
+            #                 "type": "custom",
+            #                 "tokenizer": "nori_discard",
+            #                 "filter": [
+            #                     "korean_shingle"
+            #                 ]
+            #             },
+            #             "my_stop_analyzer": {
+            #                 "type": "custom",
+            #                 "tokenizer": "nori_discard",
+            #                 "filter": [
+            #                     "korean_shingle"
+            #                 ]
+            #             }
+            #         },
+            #         "tokenizer" : {
+            #             "nori_discard" : {
+            #                 "type" : "nori_tokenizer",
+            #                 "decompound_mode" : "mixed"
+            #             }
+            #         },
+            #         "filter": {
+            #             # custom filter shingle
+            #             "korean_shingle": {
+            #                 "type": "shingle",
+            #                 "token_separator": '',
+            #                 "max_shingle_size" : 3
+            #             },
+            #             "korean_bigrams_filter": {
+            #                 "type": "cjk_bigram",
+            #                 "ignored_scripts": [
+            #                     "han",
+            #                     "hiragana",
+            #                     "katakana"
+            #                 ],
+            #                 "output_unigrams": True
+            #             }
+            #         }
+            #     }
+            # },
             "mappings": {
                 "properties": {
                     "name": {

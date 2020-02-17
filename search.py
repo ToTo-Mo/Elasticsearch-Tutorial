@@ -1,5 +1,6 @@
 from elasticsearch import Elasticsearch
 import os
+import pprint
 
 es = Elasticsearch()
 index_name = "data"
